@@ -1,24 +1,26 @@
 #! /usr/bin/python
 
 import telebot
+import math
 from random import randint
 from iteration_utilities import flatten
 
 ### TODO:
 # penis size
-# help message
 # tit request
 
 TOKEN = '1190003676:AAFYarLWv57VUBLituGun4uLe_MD0Xs4TWg'
 HELP_MESSAGE = ('I can roll dice and do funny stuff!\n\n'
                 'You can control me by sending these commands:\n\n'
-                '/help -- sends this help message\n'
-                '/start -- sends this help message\n\n'
+                '/help - sends this help message\n'
+                '/start - sends this help message\n\n'
                 'To roll dice (each command has a long and short version):\n\n'
-                '/roll -- roll dice as indicated using dice notation\n'
-                '/r -- short version\n\n'
-                '/ability_scores -- rolls six ability scores for use in D&D style game systems\n'
-                '/as -- short version\n')
+                '/roll - roll dice as indicated using dice notation\n'
+                '/r - short version\n\n'
+                '/ability_scores - rolls six ability scores for use in D&D style game systems\n'
+                '/as - short version\n\n'
+                '/penis_size - rolls your penis size, using the formula 10+log2(n)+CHA\n'
+                '/ps - short version\n')
 
 
 bot = telebot.TeleBot(TOKEN)
@@ -69,6 +71,17 @@ def remove_minimum(input_list):
     return output_list
 
 
+def roll_penis(mod):
+    die, useless_list = roll(20, 1, 0)
+    if die == 20:
+        result = 'mandingo'
+    elif die == 1:
+        result = 'micropenis'
+    else:
+        result = 10 + math.log2(die) + mod
+    return result
+    
+
 ### parse_text(text)
 # takes a string, return three values for use with roll()
 
@@ -115,6 +128,21 @@ def handle_score(message):
     score_list = score_roll()
     ability_scores = f'@{name} rolled {score_list}'
     bot.reply_to(message, ability_scores)
+    pass
+
+
+@bot.message_handler(commands=['penis_size', 'ps'])
+def handle_penis_size(message):
+    name = message.from_user.username
+    command, mod = message.text.split()
+    size = roll_penis(int(mod))
+    if size == 'mandingo':
+        penis_size = 'Impressive, @{name}, you must be very proud'
+    elif size == 'micropenis':
+        penis_size = 'Ehm... I\'m certain you have other... qualities'
+    else:
+        penis_size = f'Yeah, you\'re normal. A  boring {size}cm'
+    bot.reply_to(message, penis_size)
     pass
 
 
