@@ -6,10 +6,20 @@ from iteration_utilities import flatten
 
 ### TODO:
 # penis size
-# set caratteristiche
+# help message
 # tit request
 
 TOKEN = '1190003676:AAFYarLWv57VUBLituGun4uLe_MD0Xs4TWg'
+HELP_MESSAGE = ('I can roll dice and do funny stuff!\n\n'
+                'You can control me by sending these commands:\n\n'
+                '/help -- sends this help message\n'
+                '/start -- sends this help message\n\n'
+                'To roll dice (each command has a long and short version):\n\n'
+                '/roll -- roll dice as indicated using dice notation\n'
+                '/r -- short version\n\n'
+                '/ability_scores -- rolls six ability scores for use in D&D style game systems\n'
+                '/as -- short version\n')
+
 
 bot = telebot.TeleBot(TOKEN)
 
@@ -73,6 +83,12 @@ def parse_text(text):
     return (int(other), int(number), 0)
 
 
+@bot.message_handler(commands=['help', 'start'])
+def welcome(message):
+    bot.reply_to(message, HELP_MESSAGE)
+    pass
+
+
 ### handle_roll(message)
 # handler for the commands /roll, /r
 
@@ -88,6 +104,7 @@ def handle_roll(message):
         print(message)
         response = 'Eh?'
     bot.reply_to(message, response)
+    pass
 
 
 ### handle_score
@@ -98,6 +115,7 @@ def handle_score(message):
     score_list = score_roll()
     ability_scores = f'@{name} rolled {score_list}'
     bot.reply_to(message, ability_scores)
+    pass
 
 
 ### debug: used to get file_id of a single sticker
@@ -113,6 +131,7 @@ def handle_score(message):
 def handle_pelor(message):
     chat_id = message.chat.id
     bot.send_sticker(chat_id, "CAACAgQAAxkBAANDXuZB7Nb-rImmxXLfiWVXqj2OG5UAAjwAAy_0Wg-jNOhAndo8mxoE")
+    pass
 
 bot.polling()
 
