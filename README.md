@@ -1,1 +1,3 @@
-# puma_bot
+# pumas_rollbot
+
+A simple telegram bot to roll dice
