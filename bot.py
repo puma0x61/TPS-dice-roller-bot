@@ -6,7 +6,6 @@ from random import randint
 from iteration_utilities import flatten
 
 ### TODO:
-# penis size
 # tit request
 
 TOKEN = '1190003676:AAFYarLWv57VUBLituGun4uLe_MD0Xs4TWg'
@@ -39,6 +38,7 @@ def roll(dice, number, mod):
 
 
 ### score_roll()
+# returns a list of ability scores
 
 def score_roll():
     score_list = []
@@ -51,9 +51,12 @@ def score_roll():
         score_result_tmp.append(tmp_result_list)
         score_result = remove_minimum(score_result_tmp)
         score_list.append(score_result)
-    return_list = list(flatten([[sum(scores) for scores in sub_list] for sub_list in score_list]))
+    return_list = list(flatten([[sum(scores) for scores in sub_list] for sub_list in score_list])) # this is shit
     return return_list
 
+
+### remove_minimum(input_list)
+# removes the minimum element from input_list
 
 def remove_minimum(input_list):
     output_list = []
@@ -71,6 +74,9 @@ def remove_minimum(input_list):
     return output_list
 
 
+### roll_penis(mod)
+# rolls a d20 to decide the penis_size of a pc
+
 def roll_penis(mod):
     die, useless_list = roll(20, 1, 0)
     if die == 20:
@@ -79,6 +85,8 @@ def roll_penis(mod):
         result = 'micropenis'
     else:
         result = 10 + math.log2(die) + mod
+    if result < 1:
+        result = 'micropenis'
     return result
     
 
@@ -95,6 +103,9 @@ def parse_text(text):
         print(e)
     return (int(other), int(number), 0)
 
+
+### welcome(message)
+# sends HELP_MESSAGE
 
 @bot.message_handler(commands=['help', 'start'])
 def welcome(message):
@@ -121,6 +132,7 @@ def handle_roll(message):
 
 
 ### handle_score
+# handler for the commands /ability_scores, /as
 
 @bot.message_handler(commands=['ability_scores', 'as'])
 def handle_score(message):
@@ -131,17 +143,24 @@ def handle_score(message):
     pass
 
 
+### handle_score
+# handler for the commands /penis_size, /ps
+
 @bot.message_handler(commands=['penis_size', 'ps'])
 def handle_penis_size(message):
-    name = message.from_user.username
-    command, mod = message.text.split()
-    size = roll_penis(int(mod))
-    if size == 'mandingo':
-        penis_size = 'Impressive, @{name}, you must be very proud'
-    elif size == 'micropenis':
-        penis_size = 'Ehm... I\'m certain you have other... qualities'
-    else:
-        penis_size = f'Yeah, you\'re normal. A  boring {size}cm'
+    try:
+        name = message.from_user.username
+        command, mod = message.text.split()
+        size = roll_penis(int(mod))
+        if size == 'mandingo':
+            penis_size = 'Impressive, @{name}, you must be very proud'
+        elif size == 'micropenis':
+            penis_size = 'Ehm... I\'m certain you have other... qualities'
+        else:
+            penis_size = f'Yeah, you\'re normal. A  boring {size}cm'
+    except Exception as e:
+        print(e)
+        penis_size = f'@{name} smol pipi'
     bot.reply_to(message, penis_size)
     pass
 
