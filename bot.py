@@ -87,17 +87,16 @@ def remove_minimum(input_list):
 
 ### roll_penis(mod)
 # rolls a d20 to decide the penis_size of a pc
+# returns a tuple with the result of the die and the length
 
 def roll_penis(mod):
-    die, useless_list = roll(20, 1, 0)
+    die = roll(20, 1)
     if die == 20:
-        result = 'mandingo'
-    elif die == 1:
-        result = 'micropenis'
+        result = (die, 'mandingo')
+    elif die > 1 and die < 20:
+        result = (die, 10 + math.log2(die) + mod)
     else:
-        result = 10 + math.log2(die) + mod
-    if result < 1:
-        result = 'micropenis'
+        result = (die, 'micropenis')
     return result
 
 
@@ -163,12 +162,12 @@ def handle_penis_size(message):
         name = message.from_user.username
         command, mod = message.text.split()
         size = roll_penis(int(mod))
-        if size == 'mandingo':
-            penis_size = 'Impressive, @{name}, you must be very proud'
-        elif size == 'micropenis':
-            penis_size = 'Ehm... I\'m certain you have other... qualities'
+        if size[1] == 'mandingo':
+            penis_size = f'Impressive, @{name}, you must be very proud ({size[0]})'
+        elif size[1] == 'micropenis':
+            penis_size = f'Ehm... I\'m certain you have other... qualities ({size[0]})'
         else:
-            penis_size = f'Yeah, you\'re normal. A  boring {size}cm'
+            penis_size = f'Yeah, you\'re normal. A  boring {size[0] + mod}cm ({size[0]})'
     except Exception as e:
         print(e)
         penis_size = f'@{name} smol pipi'
