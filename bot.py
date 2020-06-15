@@ -51,7 +51,7 @@ def score_roll():
         score_result_tmp.append(tmp_result_list)
         score_result = remove_minimum(score_result_tmp)
         score_list.append(score_result)
-    return_list = list(flatten([[sum(scores) for scores in sub_list] for sub_list in score_list])) # this is shit
+    return_list = [sum(scores) for scores in score_list]
     return return_list
 
 
@@ -59,19 +59,9 @@ def score_roll():
 # removes the minimum element from input_list
 
 def remove_minimum(input_list):
-    output_list = []
-    for sub_list in input_list:
-        minimum_index = 0
-        new_sub_list = []
-        for i, n in enumerate(sub_list):
-            if n < sub_list[minimum_index]: minimum_index = i
-        for i, n in enumerate(sub_list):
-            if i == minimum_index:
-                continue
-            else:
-                new_sub_list.append(n)
-        output_list.append(new_sub_list)
-    return output_list
+    input_list = list(flatten(input_list))
+    input_list.remove(min(input_list))
+    return input_list
 
 
 ### roll_penis(mod)
