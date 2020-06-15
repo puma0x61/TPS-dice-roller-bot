@@ -36,12 +36,18 @@ else:
 # takes three values, corresponding to: number of sides of the die, number of dice,
 # modifier to the roll, returns the tuple (result, result_list)
 
-def roll(dice, number, mod):
-    result_list = []
-    for i in range(0, number):
-        result_list.append(randint(1, dice))
-    result = sum(result_list) + mod
-    return (result, result_list)
+def roll(dice, number, mod, single_result_mode=False):
+    if number > 100:
+       raise Exception('Too many dice. Max allowed is 100')
+    else:
+        result_list = []
+        for i in range(0, number):
+            result_list.append(randint(1, dice))
+        if single_result_mode:
+            result = sum(result_list) + mod
+        else:
+            result = (sum(result_list) + mod, result_list)
+    return result
 
 
 ### score_roll()
@@ -75,15 +81,15 @@ def remove_minimum(input_list):
 # rolls a d20 to decide the penis_size of a pc
 
 def roll_penis(mod):
-    die, useless_list = roll(20, 1, 0)
+    die = roll(20, 1, 0, True)
     if die == 20:
-        result = 'mandingo'
+        result = (die, 'mandingo')
     elif die == 1:
-        result = 'micropenis'
+        result = (die, 'micropenis')
     else:
-        result = 10 + math.log2(die) + mod
-    if result < 1:
-        result = 'micropenis'
+        result = (die, 10 + math.log2(die) + mod)
+        if result[1] < 6:
+            result = (die, 'weird')
     return result
     
 
@@ -95,10 +101,11 @@ def parse_text(text):
     number, other = equation.split('d')
     try:
         dice, mod = other.split('+')
-        return (int(dice), int(number), int(mod))
+        result = (int(dice), int(number), int(mod))
     except Exception as e:
         print(e)
-    return (int(other), int(number), 0)
+        result = (int(other), int(number), 0)
+    return result
 
 
 ### welcome(message)
@@ -123,7 +130,7 @@ def handle_roll(message):
     except Exception as e:
         print(e)
         print(message)
-        response = 'Eh?'
+        response = e
     bot.reply_to(message, response)
     pass
 
@@ -145,19 +152,21 @@ def handle_score(message):
 
 @bot.message_handler(commands=['penis_size', 'ps'])
 def handle_penis_size(message):
+    name = message.from_user.username
     try:
-        name = message.from_user.username
         command, mod = message.text.split()
         size = roll_penis(int(mod))
-        if size == 'mandingo':
-            penis_size = 'Impressive, @{name}, you must be very proud'
-        elif size == 'micropenis':
-            penis_size = 'Ehm... I\'m certain you have other... qualities'
-        else:
-            penis_size = f'Yeah, you\'re normal. A  boring {size}cm'
     except Exception as e:
         print(e)
-        penis_size = f'@{name} smol pipi'
+        size = roll_penis(0)
+    if size[1] == 'mandingo':
+        penis_size = f'Impressive, @{name}, you must be very proud\n(you rolled a {size[0]})'
+    elif size[1] == 'micropenis':
+        penis_size = f'Ehm... I\'m certain you have other... qualities\n(you rolled a {size[0]})'
+    elif size[1] == 'weird':
+        penis_size = f'Let\'s not get too negative: your boobs are pretty... nice? I guess?\n(you rolled a {size[0]})'
+    else:
+        penis_size = f'Yeah, you\'re normal. A  boring %.2fcm\n(you rolled a {size[0]})'%size[1]
     bot.reply_to(message, penis_size)
     pass
 
