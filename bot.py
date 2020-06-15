@@ -59,19 +59,7 @@ def score_roll():
 # removes the minimum element from input_list
 
 def remove_minimum(input_list):
-    output_list = []
-    for sub_list in input_list:
-        minimum_index = 0
-        new_sub_list = []
-        for i, n in enumerate(sub_list):
-            if n < sub_list[minimum_index]: minimum_index = i
-        for i, n in enumerate(sub_list):
-            if i == minimum_index:
-                continue
-            else:
-                new_sub_list.append(n)
-        output_list.append(new_sub_list)
-    return output_list
+    return input_list.remove(min(input_list))
 
 
 ### roll_penis(mod)
@@ -88,7 +76,7 @@ def roll_penis(mod):
     if result < 1:
         result = 'micropenis'
     return result
-    
+
 
 ### parse_text(text)
 # takes a string, return three values for use with roll()
@@ -121,7 +109,7 @@ def handle_roll(message):
     try:
         name = message.from_user.username
         dice, number, mod = parse_text(message.text)
-        result, result_list = roll(dice, number, mod)    
+        result, result_list = roll(dice, number, mod)
         response = f'@{name} rolled {result}, ({result_list})'
     except Exception as e:
         print(e)
@@ -181,4 +169,3 @@ def handle_pelor(message):
     pass
 
 bot.polling()
-
