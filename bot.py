@@ -2,13 +2,13 @@
 
 import telebot
 import math
+import json
 from random import randint
 from iteration_utilities import flatten
 
 ### TODO:
 # tit request
 
-TOKEN = '1190003676:AAFYarLWv57VUBLituGun4uLe_MD0Xs4TWg'
 HELP_MESSAGE = ('I can roll dice and do funny stuff!\n\n'
                 'You can control me by sending these commands:\n\n'
                 '/help - sends this help message\n'
@@ -22,7 +22,14 @@ HELP_MESSAGE = ('I can roll dice and do funny stuff!\n\n'
                 '/ps - short version\n')
 
 
-bot = telebot.TeleBot(TOKEN)
+config = json.load(open('config.json'))
+if config['bot']:
+    bot = telebot.TeleBot(token=config['bot'])
+else:
+    print ("###################################################")
+    print ("# Please setup the needed keys in the config file #")
+    print ("###################################################")
+    sys.exit()
 
 
 ### roll(dice, number, mod)
