@@ -36,6 +36,17 @@ def roll(dice, number, mod):
     result = sum(result_list) + mod
     return (result, result_list)
 
+### roll(dice, number)
+# takes two values, corresponding to: number of sides of the die, number of dice,
+# returns the result
+ 
+def roll(dice, number):
+    result_list = []
+    for i in range(0, number):
+        result_list.append(randint(1, dice))
+    result = sum(result_list)
+    return result
+
 
 ### score_roll()
 # returns a list of ability scores
@@ -66,15 +77,13 @@ def remove_minimum(input_list):
 # rolls a d20 to decide the penis_size of a pc
 
 def roll_penis(mod):
-    die, useless_list = roll(20, 1, 0)
+    die = roll(20, 1)
     if die == 20:
-        result = 'mandingo'
-    elif die == 1:
-        result = 'micropenis'
+        result = (die, 'mandingo')
     else:
-        result = 10 + math.log2(die) + mod
-    if result < 1:
-        result = 'micropenis'
+        result = (die, 10 + math.log2(die) + mod)
+    else:
+        result = (die, 'micropenis')
     return result
     
 
@@ -140,12 +149,12 @@ def handle_penis_size(message):
         name = message.from_user.username
         command, mod = message.text.split()
         size = roll_penis(int(mod))
-        if size == 'mandingo':
-            penis_size = 'Impressive, @{name}, you must be very proud'
-        elif size == 'micropenis':
-            penis_size = 'Ehm... I\'m certain you have other... qualities'
+        if size[1] == 'mandingo':
+            penis_size = f'Impressive, @{name}, you must be very proud ({size[0]} + {mod})'
+        elif size[1] == 'micropenis':
+            penis_size = f'Ehm... I\'m certain you have other... qualities  ({size[0]} + {mod})'
         else:
-            penis_size = f'Yeah, you\'re normal. A  boring {size}cm'
+            penis_size = f'Yeah, you\'re normal. A  boring {size[1]}cm  ({size[0]} + {mod})'
     except Exception as e:
         print(e)
         penis_size = f'@{name} smol pipi'
