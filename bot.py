@@ -41,8 +41,8 @@ def roll(dice, number, mod, single_result_mode=False):
        raise Exception('Too many dice. Max allowed is 100')
     else:
         result_list = []
-        for i in range(0, number):
-            result_list.append(randint(1, dice))
+        for i in range(0, abs(number)):
+            result_list.append(randint(1, abs(dice)))
         if single_result_mode:
             result = sum(result_list) + mod
         else:
@@ -104,7 +104,12 @@ def parse_text(text):
         result = (int(dice), int(number), int(mod))
     except Exception as e:
         print(e)
-        result = (int(other), int(number), 0)
+        try:
+            dice, mod = other.split('-')
+            result = (int(dice), int(number), -int(mod))
+        except Exception as f:
+            print(f)
+            result = (int(other), int(number), 0)
     return result
 
 
@@ -129,8 +134,7 @@ def handle_roll(message):
         response = f'@{name} rolled {result}, ({result_list})'
     except Exception as e:
         print(e)
-        print(message)
-        response = e
+        response = 'eh?'
     bot.reply_to(message, response)
     pass
 
