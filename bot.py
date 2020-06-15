@@ -70,7 +70,19 @@ def score_roll():
 # removes the minimum element from input_list
 
 def remove_minimum(input_list):
-    return input_list.remove(min(input_list))
+    output_list = []
+    for sub_list in input_list:
+        minimum_index = 0
+        new_sub_list = []
+        for i, n in enumerate(sub_list):
+            if n < sub_list[minimum_index]: minimum_index = i
+        for i, n in enumerate(sub_list):
+            if i == minimum_index:
+                continue
+            else:
+                new_sub_list.append(n)
+        output_list.append(new_sub_list)
+    return output_list
 
 
 ### roll_penis(mod)
