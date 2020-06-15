@@ -37,6 +37,17 @@ def roll(dice, number, mod):
     return (result, result_list)
 
 
+### roll(dice, number)
+# takes two values, corresponding to: number of sides of the die, number of dice,
+# returns the result
+
+def roll(dice, number)
+    result_list = []
+    for i in range(0, number):
+        result_list.append(randint(1, dice))
+    result = sum(result_list)
+    return result
+
 ### score_roll()
 # returns a list of ability scores
 
@@ -88,7 +99,7 @@ def roll_penis(mod):
     if result < 1:
         result = 'micropenis'
     return result
-    
+
 
 ### parse_text(text)
 # takes a string, return three values for use with roll()
@@ -121,7 +132,7 @@ def handle_roll(message):
     try:
         name = message.from_user.username
         dice, number, mod = parse_text(message.text)
-        result, result_list = roll(dice, number, mod)    
+        result, result_list = roll(dice, number, mod)
         response = f'@{name} rolled {result}, ({result_list})'
     except Exception as e:
         print(e)
@@ -181,4 +192,3 @@ def handle_pelor(message):
     pass
 
 bot.polling()
-
