@@ -21,7 +21,6 @@ HELP_MESSAGE = ('I can roll dice and do funny stuff!\n\n'
                 '/penis_size - rolls your penis size, using the formula 10+log2(n)+CHA\n'
                 '/ps - short version\n')
 
-
 bot = telebot.TeleBot(TOKEN)
 
 
@@ -51,7 +50,7 @@ def score_roll():
         score_result_tmp.append(tmp_result_list)
         score_result = remove_minimum(score_result_tmp)
         score_list.append(score_result)
-    return_list = list(flatten([[sum(scores) for scores in sub_list] for sub_list in score_list])) # this is shit
+    return_list = list(flatten([[sum(scores) for scores in sub_list] for sub_list in score_list]))  # this is shit
     return return_list
 
 
@@ -88,7 +87,7 @@ def roll_penis(mod):
     if result < 1:
         result = 'micropenis'
     return result
-    
+
 
 ### parse_text(text)
 # takes a string, return three values for use with roll()
@@ -103,6 +102,18 @@ def parse_text(text):
         print(e)
     return (int(other), int(number), 0)
 
+
+### spongebob_parser(text)
+# takes a string, return the same string with alternating uppercase and lowercase characters
+
+def spongebob_parser(text):
+    spongebob_sentence = ""
+    for idx, char in list(enumerate(text.lower())):
+        if idx % 2 == 0:
+            spongebob_sentence.append(char.upper())
+        else:
+            spongebob_sentence.append(char)
+    return spongebob_sentence
 
 ### welcome(message)
 # sends HELP_MESSAGE
@@ -121,7 +132,7 @@ def handle_roll(message):
     try:
         name = message.from_user.username
         dice, number, mod = parse_text(message.text)
-        result, result_list = roll(dice, number, mod)    
+        result, result_list = roll(dice, number, mod)
         response = f'@{name} rolled {result}, ({result_list})'
     except Exception as e:
         print(e)
@@ -180,5 +191,18 @@ def handle_pelor(message):
     bot.send_sticker(chat_id, "CAACAgQAAxkBAANDXuZB7Nb-rImmxXLfiWVXqj2OG5UAAjwAAy_0Wg-jNOhAndo8mxoE")
     pass
 
-bot.polling()
 
+### handle_spongebob(message)
+# handler for the commands /spongebob, /sp
+
+@bot.message_handler(commands=['spongebob', 'sp'])
+def handle_spongebob(message):
+    try:
+        output = spongebob_parser(message.text)
+    except Exception as e:
+        print(e)
+        output = 'YoU cAn\'T eVeN sPeLl RiGht'
+    bot.reply_to(message, output)
+    pass
+
+bot.polling()
