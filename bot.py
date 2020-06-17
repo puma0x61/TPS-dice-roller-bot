@@ -2,6 +2,7 @@
 
 import telebot
 import math
+from random import choice
 from random import randint
 from iteration_utilities import flatten
 
@@ -88,7 +89,7 @@ def roll_penis(mod):
     if result < 1:
         result = 'micropenis'
     return result
-    
+
 
 ### parse_text(text)
 # takes a string, return three values for use with roll()
@@ -103,6 +104,26 @@ def parse_text(text):
         print(e)
     return (int(other), int(number), 0)
 
+
+### alive_sentence()
+# reply with a random sentence
+def alive_sentence():
+    sentences = [
+        'Alive and kicking',
+        'Lock \'n loaded'',
+        'My life for DnD',
+        'Stop poking me',
+        'I like when you try to reach me',
+        'I\'m alive, not by my choice',
+        'What does "alive" means?',
+        'I\'m alive, be grateful to Pelor',
+        'Who\'s summoning me?',
+        '(/^▽^)/',
+        '(つ ͡° ͜ʖ ͡°)つ',
+        '(╯°□°）╯︵ ┻━┻',
+        'ಠ_ಠ'
+    ]
+    return random.choice(sentences)
 
 ### welcome(message)
 # sends HELP_MESSAGE
@@ -121,7 +142,7 @@ def handle_roll(message):
     try:
         name = message.from_user.username
         dice, number, mod = parse_text(message.text)
-        result, result_list = roll(dice, number, mod)    
+        result, result_list = roll(dice, number, mod)
         response = f'@{name} rolled {result}, ({result_list})'
     except Exception as e:
         print(e)
@@ -180,5 +201,13 @@ def handle_pelor(message):
     bot.send_sticker(chat_id, "CAACAgQAAxkBAANDXuZB7Nb-rImmxXLfiWVXqj2OG5UAAjwAAy_0Wg-jNOhAndo8mxoE")
     pass
 
-bot.polling()
+### handle_alive_service
+# handler for the commands /alive, /imalive, /ima
 
+@bot.message_handler(commands=['alive', 'imalive', 'ima'])
+def handle_alive_service(message):
+    name = message.from_user.username
+    bot.reply_to(message, alive_sentence)
+    pass
+
+bot.polling()
