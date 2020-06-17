@@ -3,13 +3,14 @@
 import telebot
 import math
 from random import choice
+import json
+
 from random import randint
 from iteration_utilities import flatten
 
 ### TODO:
 # tit request
 
-TOKEN = '1190003676:AAFYarLWv57VUBLituGun4uLe_MD0Xs4TWg'
 HELP_MESSAGE = ('I can roll dice and do funny stuff!\n\n'
                 'You can control me by sending these commands:\n\n'
                 '/help - sends this help message\n'
@@ -23,19 +24,32 @@ HELP_MESSAGE = ('I can roll dice and do funny stuff!\n\n'
                 '/ps - short version\n')
 
 
-bot = telebot.TeleBot(TOKEN)
+config = json.load(open('config.json'))
+if config['bot']:
+    bot = telebot.TeleBot(token=config['bot'])
+else:
+    print ("###################################################")
+    print ("# Please setup the needed keys in the config file #")
+    print ("###################################################")
+    sys.exit()
 
 
 ### roll(dice, number, mod)
 # takes three values, corresponding to: number of sides of the die, number of dice,
 # modifier to the roll, returns the tuple (result, result_list)
 
-def roll(dice, number, mod):
-    result_list = []
-    for i in range(0, number):
-        result_list.append(randint(1, dice))
-    result = sum(result_list) + mod
-    return (result, result_list)
+def roll(dice, number, mod, single_result_mode=False):
+    if number > 100:
+       raise Exception('Too many dice. Max allowed is 100')
+    else:
+        result_list = []
+        for i in range(0, abs(number)):
+            result_list.append(randint(1, abs(dice)))
+        if single_result_mode:
+            result = sum(result_list) + mod
+        else:
+            result = (sum(result_list) + mod, result_list)
+    return result
 
 
 ### score_roll()
@@ -52,7 +66,7 @@ def score_roll():
         score_result_tmp.append(tmp_result_list)
         score_result = remove_minimum(score_result_tmp)
         score_list.append(score_result)
-    return_list = list(flatten([[sum(scores) for scores in sub_list] for sub_list in score_list])) # this is shit
+    return_list = [sum(scores) for scores in score_list]
     return return_list
 
 
@@ -60,34 +74,24 @@ def score_roll():
 # removes the minimum element from input_list
 
 def remove_minimum(input_list):
-    output_list = []
-    for sub_list in input_list:
-        minimum_index = 0
-        new_sub_list = []
-        for i, n in enumerate(sub_list):
-            if n < sub_list[minimum_index]: minimum_index = i
-        for i, n in enumerate(sub_list):
-            if i == minimum_index:
-                continue
-            else:
-                new_sub_list.append(n)
-        output_list.append(new_sub_list)
-    return output_list
+    input_list = list(flatten(input_list))
+    input_list.remove(min(input_list))
+    return input_list
 
 
 ### roll_penis(mod)
 # rolls a d20 to decide the penis_size of a pc
 
 def roll_penis(mod):
-    die, useless_list = roll(20, 1, 0)
+    die = roll(20, 1, 0, True)
     if die == 20:
-        result = 'mandingo'
+        result = (die, 'mandingo')
     elif die == 1:
-        result = 'micropenis'
+        result = (die, 'micropenis')
     else:
-        result = 10 + math.log2(die) + mod
-    if result < 1:
-        result = 'micropenis'
+        result = (die, 10 + math.log2(die) + mod)
+        if result[1] < 6:
+            result = (die, 'weird')
     return result
 
 
@@ -99,10 +103,16 @@ def parse_text(text):
     number, other = equation.split('d')
     try:
         dice, mod = other.split('+')
-        return (int(dice), int(number), int(mod))
+        result = (int(dice), int(number), int(mod))
     except Exception as e:
         print(e)
-    return (int(other), int(number), 0)
+        try:
+            dice, mod = other.split('-')
+            result = (int(dice), int(number), -int(mod))
+        except Exception as f:
+            print(f)
+            result = (int(other), int(number), 0)
+    return result
 
 
 ### alive_sentence()
@@ -146,8 +156,7 @@ def handle_roll(message):
         response = f'@{name} rolled {result}, ({result_list})'
     except Exception as e:
         print(e)
-        print(message)
-        response = 'Eh?'
+        response = 'eh?'
     bot.reply_to(message, response)
     pass
 
@@ -169,19 +178,21 @@ def handle_score(message):
 
 @bot.message_handler(commands=['penis_size', 'ps'])
 def handle_penis_size(message):
+    name = message.from_user.username
     try:
-        name = message.from_user.username
         command, mod = message.text.split()
         size = roll_penis(int(mod))
-        if size == 'mandingo':
-            penis_size = 'Impressive, @{name}, you must be very proud'
-        elif size == 'micropenis':
-            penis_size = 'Ehm... I\'m certain you have other... qualities'
-        else:
-            penis_size = f'Yeah, you\'re normal. A  boring {size}cm'
     except Exception as e:
         print(e)
-        penis_size = f'@{name} smol pipi'
+        size = roll_penis(0)
+    if size[1] == 'mandingo':
+        penis_size = f'Impressive, @{name}, you must be very proud\n(you rolled a {size[0]})'
+    elif size[1] == 'micropenis':
+        penis_size = f'Ehm... I\'m certain you have other... qualities\n(you rolled a {size[0]})'
+    elif size[1] == 'weird':
+        penis_size = f'Let\'s not get too negative: your boobs are pretty... nice? I guess?\n(you rolled a {size[0]})'
+    else:
+        penis_size = f'Yeah, you\'re normal. A  boring %.2fcm\n(you rolled a {size[0]})'%size[1]
     bot.reply_to(message, penis_size)
     pass
 
