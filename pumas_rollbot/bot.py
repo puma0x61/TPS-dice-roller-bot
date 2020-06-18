@@ -125,7 +125,7 @@ def handle_i_am_alive(message):
 @bot.message_handler(commands=['spongebob', 'sp'])
 def handle_spongebob(message):
     try:
-        sentence = spongebob_sentence(message.text())
+        sentence = spongebob_sentence(message.text)
     except Exception as e:
         print(e)
         sentence = 'YoU CaN\'t eVeN SpElL RiGhT'
