@@ -21,6 +21,8 @@ HELP_MESSAGE = ('I can roll dice and do funny stuff!\n\n'
                 '/penis_size - rolls your penis size, using the formula 10+log2(n)+CHA\n'
                 '/ps - short version\n\n'
                 '/alive - returns the emotional state of the bot\n')
+                '/spongebob - takes your sentence and returns a saltier one\n'
+                '/sp - short version\n')
 
 
 config = json.load(open('../config.json'))
@@ -113,6 +115,19 @@ def handle_i_am_alive(message):
     new_message = alive_service()
     new_message = f'Yes, @{name}, {new_message}'
     bot.reply_to(message, new_message)
+
+
+### handle_spongebob(message)
+# handler for the commands /spongebob, /sp
+
+@bot.message_handler(commands=['spongebob', 'sp'])
+def handle_spongebob(message):
+    try:
+        sentence = spongebob_sentence(message.text())
+    except Exception as e:
+        print(e)
+        sentence = 'YoU CaN\'t eVeN SpElL RiGhT'
+    bot.reply_to(message, sentence)
     pass
 
 bot.polling()
