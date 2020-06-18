@@ -19,7 +19,8 @@ HELP_MESSAGE = ('I can roll dice and do funny stuff!\n\n'
                 '/ability_scores - rolls six ability scores for use in D&D style game systems\n'
                 '/as - short version\n\n'
                 '/penis_size - rolls your penis size, using the formula 10+log2(n)+CHA\n'
-                '/ps - short version\n')
+                '/ps - short version\n\n'
+                '/alive - returns the emotional state of the bot\n')
 
 
 config = json.load(open('../config.json'))
@@ -101,6 +102,17 @@ def handle_penis_size(message):
 def handle_pelor(message):
     chat_id = message.chat.id
     bot.send_sticker(chat_id, "CAACAgQAAxkBAANDXuZB7Nb-rImmxXLfiWVXqj2OG5UAAjwAAy_0Wg-jNOhAndo8mxoE")
+    pass
+
+### handle_i_am_alive
+# handler for the command /alive
+
+@bot.message_handler(commands=['alive'])
+def handle_i_am_alive(message):
+    name = message.from_user.username
+    new_message = alive_service()
+    new_message = f'Yes, @{name}, {new_message}'
+    bot.reply_to(message, new_message)
     pass
 
 bot.polling()
