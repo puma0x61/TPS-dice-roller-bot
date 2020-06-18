@@ -118,6 +118,14 @@ def handle_i_am_alive(message):
     bot.reply_to(message, new_message)
     pass
 
+
+### handle_edgelord
+# handler for the command /edgelord
+
+@bot.message_handler(commands=['edgelord'])
+def handle_edgelord(message):
+    bot.reply_to(message, edgelord_feature())
+    pass
     
 ### handle_spongebob(message)
 # handler for the commands /spongebob, /sp
