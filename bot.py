@@ -1,8 +1,9 @@
 #! /usr/bin/python
 
-import telebot
+import sys
 import math
 import json
+import telebot
 from random import randint
 from iteration_utilities import flatten
 
