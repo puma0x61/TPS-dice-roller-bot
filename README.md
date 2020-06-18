@@ -2,4 +2,4 @@
 
 A simple telegram bot to roll dice
 
-It uses https://github.com/eternnoir/pyTelegramBotAPI
+Powered by [pyTelegramBotAPI](https://github.com/eternnoir/pyTelegramBotAPI)
