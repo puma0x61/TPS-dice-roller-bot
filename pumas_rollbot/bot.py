@@ -1,10 +1,10 @@
 #! /usr/bin/python
 
-import telebot
+import sys
 import json
+import telebot
 
 from core import *
-
 
 ### TODO:
 # tit request
