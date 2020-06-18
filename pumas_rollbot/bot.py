@@ -1,11 +1,14 @@
 #! /usr/bin/python
 
 import sys
+<<<<<<< HEAD
 import telebot
+=======
+>>>>>>> master
 import json
+import telebot
 
 from core import *
-
 
 ### TODO:
 # tit request
