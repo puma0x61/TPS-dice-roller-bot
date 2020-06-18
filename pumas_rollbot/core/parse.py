@@ -1,5 +1,3 @@
-
-
 ### parse_text(text)
 # takes a string, return three values for use with roll()
 
