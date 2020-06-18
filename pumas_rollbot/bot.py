@@ -19,7 +19,9 @@ HELP_MESSAGE = ('I can roll dice and do funny stuff!\n\n'
                 '/ability_scores - rolls six ability scores for use in D&D style game systems\n'
                 '/as - short version\n\n'
                 '/penis_size - rolls your penis size, using the formula 10+log2(n)+CHA\n'
-                '/ps - short version\n')
+                '/ps - short version\n\n'
+                '/spongebob - takes your sentence and returns a saltier one\n'
+                '/sp - short version\n')
 
 
 config = json.load(open('../config.json'))
@@ -101,6 +103,19 @@ def handle_penis_size(message):
 def handle_pelor(message):
     chat_id = message.chat.id
     bot.send_sticker(chat_id, "CAACAgQAAxkBAANDXuZB7Nb-rImmxXLfiWVXqj2OG5UAAjwAAy_0Wg-jNOhAndo8mxoE")
+    pass
+
+### handle_spongebob(message)
+# handler for the commands /spongebob, /sp
+
+@bot.message_handler(commands=['spongebob', 'sp'])
+def handle_spongebob(message):
+    try:
+        sentence = spongebob_sentence(message.text())
+    except Exception as e:
+        print(e)
+        sentence = 'YoU CaN\'t eVeN SpElL RiGhT'
+    bot.reply_to(message, sentence)
     pass
 
 bot.polling()
