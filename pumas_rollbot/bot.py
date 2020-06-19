@@ -24,7 +24,9 @@ HELP_MESSAGE = ('I can roll dice and do funny stuff!\n\n'
                 '/spongebob - takes your sentence and returns a saltier one\n'
                 '/sp - short version\n\n'
                 '/spongerep - reply to a message writing this, it will mock the first message\n'
-                '/spr - short version')
+                '/spr - short version\n\n'
+                '/edgelord - give your character a reason to brood\n'
+                'this command is the only one to just have a long version, for added edginess')
 
 
 config = json.load(open('../config.json'))
