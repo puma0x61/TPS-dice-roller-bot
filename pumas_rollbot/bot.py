@@ -28,22 +28,27 @@ def welcome(message):
     pass
 
 
+### handle_text(message)
+# asks for nudes, sometimes
+
+@bot.message_handler(func=lambda pippo: randint(0, 100) <= 100, content_types=["text"])
+def handle_text(message):
+    bot.reply_to(message, tit_request())
+
+
 ### handle_roll(message)
 # handler for the commands /roll, /r
 
 @bot.message_handler(commands=['roll', 'r'])
 def handle_roll(message):
-    if randint(0, 100) <= 1:
-        response = tit_request()
-    else:
-        try:
-            name = message.from_user.username
-            dice, number, mod = parse_text(message.text)
-            result, result_list = roll(dice, number, mod)    
-            response = f'@{name} rolled {result}, ({result_list})'
-        except Exception as e:
-            print(e)
-            response = 'eh?'
+    try:
+        name = message.from_user.username
+        dice, number, mod = parse_text(message.text)
+        result, result_list = roll(dice, number, mod)    
+        response = f'@{name} rolled {result}, ({result_list})'
+    except Exception as e:
+        print(e)
+        response = 'eh?'
     bot.reply_to(message, response)
     pass
 
