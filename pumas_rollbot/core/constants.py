@@ -146,3 +146,13 @@ EDGELORD_PARTS=[
         'and now I\'m Batman'
     ]
 ]
+
+TIT_REQUEST_SERVICE = [
+        'send b00bs',
+        'send tits',
+        'send nudes ;)',
+        'TITS, NOW',
+        'may I see your breasts, darling?',
+        'hmm',
+        'oh Pelor, grant me the strength to ask for nudes'
+]

@@ -4,12 +4,9 @@ import sys
 import json
 import telebot
 
-from core import *
+from random import randint
 
-### TODO:
-# tit request
-# background help
-# character formation
+from core import *
 
 
 config = json.load(open('../config.json'))
@@ -29,6 +26,14 @@ else:
 def welcome(message):
     bot.reply_to(message, HELP_MESSAGE)
     pass
+
+
+### handle_text(message)
+# asks for nudes, sometimes
+
+@bot.message_handler(func=lambda pippo: randint(0, 100) <= 100, content_types=["text"])
+def handle_text(message):
+    bot.reply_to(message, tit_request())
 
 
 ### handle_roll(message)
@@ -143,5 +148,9 @@ def handle_spongebob_reply(message):
         sentence = 'YoU CaN\'t eVeN SpElL RiGhT'
     bot.reply_to(message.reply_to_message, sentence)
     pass
+
+
+
+
 
 bot.polling()
