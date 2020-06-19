@@ -36,7 +36,7 @@ def welcome(message):
 ### handle_text(message)
 # asks for nudes, sometimes
 
-@bot.message_handler(func=lambda pippo: randint(0, 100) <= 100, content_types=["text"])
+@bot.message_handler(func=lambda pippo: randint(0, 100) <= 1, content_types=["text"])
 def handle_text(message):
     bot.reply_to(message, tit_request())
 
