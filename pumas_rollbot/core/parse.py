@@ -2,34 +2,25 @@
 # takes a string, return three values for use with roll()
 
 def parse_text(text):
-    # "/r"," d20 + 4"
-    # "/r"," 1d20 + 4"
-    command, equation = text.split()
-    # " ","20 + 4"
-    # " 1","20 + 4"
+    command, equation = text.split(' ')
     number, other = equation.split('d')
     try:
-        # "20 "," 4"
         if '+' in other:
             dice, mod = other.split('+')
         elif '-' in other:
             dice, mod = other.split('-')
+            mod = '-' + mod
         else:
             dice, mod = {other, '0'}
 
-        # "","20","4"
-        # "1","20","4"
-        # In this way we can have spaces in the message
-        number = number.strip()
-        dice = dice.strip()
-        mod = mod.strip()
-
-        if number != '':
-            result = (int(dice), int(number), int(mod))
+        if len(number) == 0:
+            number = '1'
+        if int(number) < 0:
+            result = (int(0), int(0), int(0))
         else:
-            result = (int(dice), 1, int(mod))
+            result = (int(dice), int(number), int(mod))
     except Exception as e:
         print(e)
-        return (0, 0, 0)
+        return (int(0), int(0), int(0))
 
     return result
