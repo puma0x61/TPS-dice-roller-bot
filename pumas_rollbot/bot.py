@@ -19,7 +19,14 @@ HELP_MESSAGE = ('I can roll dice and do funny stuff!\n\n'
                 '/ability_scores - rolls six ability scores for use in D&D style game systems\n'
                 '/as - short version\n\n'
                 '/penis_size - rolls your penis size, using the formula 10+log2(n)+CHA\n'
-                '/ps - short version\n')
+                '/ps - short version\n\n'
+                '/alive - returns the emotional state of the bot\n'
+                '/spongebob - takes your sentence and returns a saltier one\n'
+                '/sp - short version\n\n'
+                '/spongerep - reply to a message writing this, it will mock the first message\n'
+                '/spr - short version\n\n'
+                '/edgelord - give your character a reason to brood\n'
+                'this command is the only one to just have a long version, for added edginess')
 
 
 config = json.load(open('../config.json'))
@@ -103,5 +110,52 @@ def handle_pelor(message):
     bot.send_sticker(chat_id, "CAACAgQAAxkBAANDXuZB7Nb-rImmxXLfiWVXqj2OG5UAAjwAAy_0Wg-jNOhAndo8mxoE")
     pass
 
-bot.polling()
+  
+### handle_i_am_alive
+# handler for the command /alive
 
+@bot.message_handler(commands=['alive'])
+def handle_i_am_alive(message):
+    name = message.from_user.username
+    new_message = alive_service()
+    new_message = f'Yes, @{name}, {new_message}'
+    bot.reply_to(message, new_message)
+    pass
+
+
+### handle_edgelord
+# handler for the command /edgelord
+
+@bot.message_handler(commands=['edgelord'])
+def handle_edgelord(message):
+    bot.reply_to(message, edgelord_feature())
+    pass
+    
+### handle_spongebob(message)
+# handler for the commands /spongebob, /sp
+
+@bot.message_handler(commands=['spongebob', 'sp'])
+def handle_spongebob(message):
+    try:
+        sentence = spongebob_sentence(message.text)
+    except Exception as e:
+        print(e)
+        sentence = 'YoU CaN\'t eVeN SpElL RiGhT'
+    bot.reply_to(message, sentence)
+    pass
+
+
+### handle_spongebob_reply(message)
+# handler for the commands /spongebob, /sp
+
+@bot.message_handler(commands=['spongerep', 'spr'])
+def handle_spongebob_reply(message):
+    try:
+        sentence = spongebob_sentence(message.reply_to_message.text)
+    except Exception as e:
+        print(e)
+        sentence = 'YoU CaN\'t eVeN SpElL RiGhT'
+    bot.reply_to(message.reply_to_message, sentence)
+    pass
+
+bot.polling()
