@@ -4,29 +4,9 @@ import sys
 import json
 import telebot
 
+from random import randint
+
 from core import *
-
-### TODO:
-# tit request
-
-HELP_MESSAGE = ('I can roll dice and do funny stuff!\n\n'
-                'You can control me by sending these commands:\n\n'
-                '/help - sends this help message\n'
-                '/start - sends this help message\n\n'
-                'To roll dice (each command has a long and short version):\n\n'
-                '/roll - roll dice as indicated using dice notation\n'
-                '/r - short version\n\n'
-                '/ability_scores - rolls six ability scores for use in D&D style game systems\n'
-                '/as - short version\n\n'
-                '/penis_size - rolls your penis size, using the formula 10+log2(n)+CHA\n'
-                '/ps - short version\n\n'
-                '/alive - returns the emotional state of the bot\n'
-                '/spongebob - takes your sentence and returns a saltier one\n'
-                '/sp - short version\n\n'
-                '/spongerep - reply to a message writing this, it will mock the first message\n'
-                '/spr - short version\n\n'
-                '/edgelord - give your character a reason to brood\n'
-                'this command is the only one to just have a long version, for added edginess')
 
 
 config = json.load(open('../config.json'))
@@ -48,6 +28,14 @@ def welcome(message):
     pass
 
 
+### handle_text(message)
+# asks for nudes, sometimes
+
+@bot.message_handler(func=lambda pippo: randint(0, 100) <= 1, content_types=["text"])
+def handle_text(message):
+    bot.reply_to(message, tit_request())
+
+
 ### handle_roll(message)
 # handler for the commands /roll, /r
 
@@ -56,7 +44,10 @@ def handle_roll(message):
     try:
         name = message.from_user.username
         dice, number, mod = parse_text(message.text)
-        result, result_list = roll(dice, number, mod)    
+        # parse_text returns number = '0' if there was an error
+        if (number == '0'):
+            bot.reply_to(message, 'eh?')
+        result, result_list = roll(dice, number, mod)
         response = f'@{name} rolled {result}, ({result_list})'
     except Exception as e:
         print(e)
@@ -157,5 +148,9 @@ def handle_spongebob_reply(message):
         sentence = 'YoU CaN\'t eVeN SpElL RiGhT'
     bot.reply_to(message.reply_to_message, sentence)
     pass
+
+
+
+
 
 bot.polling()

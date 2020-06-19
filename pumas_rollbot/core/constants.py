@@ -1,3 +1,22 @@
+HELP_MESSAGE = ('I can roll dice and do funny stuff!\n\n'
+                'You can control me by sending these commands:\n\n'
+                '/help - sends this help message\n'
+                '/start - sends this help message\n\n'
+                'To roll dice (each command has a long and short version):\n\n'
+                '/roll - roll dice as indicated using dice notation\n'
+                '/r - short version\n\n'
+                '/ability_scores - rolls six ability scores for use in D&D style game systems\n'
+                '/as - short version\n\n'
+                '/penis_size - rolls your penis size, using the formula 10+log2(n)+CHA\n'
+                '/ps - short version\n\n'
+                '/alive - returns the emotional state of the bot\n'
+                '/spongebob - takes your sentence and returns a saltier one\n'
+                '/sp - short version\n\n'
+                '/spongerep - reply to a message writing this, it will mock the first message\n'
+                '/spr - short version\n\n'
+                '/edgelord - give your character a reason to brood\n'
+                'this command is the only one to just have a long version, for added edginess')
+
 ALIVE_SERVICE=[
     'Alive and kicking',
     'Lock \'n loaded',
@@ -120,10 +139,20 @@ EDGELORD_PARTS=[
         'and now I vow to prevent that from happening to anyone else',
         'and now I am haunted by their memory',
         'and now I seek to uncover the truth about what happened',
-        'and now I i fear it will happen again',
+        'and now I fear it will happen again',
         'and now I am stronger because of it',
         'and now I\'m and alcoholic',
         'and now I have multiclassed into warlock',
         'and now I\'m Batman'
     ]
+]
+
+TIT_REQUEST_SERVICE = [
+        'send b00bs',
+        'send tits',
+        'send nudes ;)',
+        'TITS, NOW',
+        'may I see your breasts, darling?',
+        'hmm',
+        'oh Pelor, grant me the strength to ask for nudes'
 ]
