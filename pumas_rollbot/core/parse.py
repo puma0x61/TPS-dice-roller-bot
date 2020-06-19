@@ -11,7 +11,7 @@ def parse_text(text):
             dice, mod = other.split('-')
             mod = '-' + mod
         else:
-            dice, mod = {other, '0'}
+            dice, mod = other, '0'
 
         if len(number) == 0:
             number = '1'
