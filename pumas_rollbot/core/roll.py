@@ -15,7 +15,10 @@ def roll(dice, number, mod, single_result_mode=False):
     else:
         result_list = []
         for i in range(0, abs(number)):
-            result_list.append(randint(1, abs(dice)))
+            if dice >= 1:
+                result_list.append(randint(1, dice))
+            else:
+                result_list.append(randint(1, 1))
         if single_result_mode:
             result = sum(result_list) + mod
         else:
