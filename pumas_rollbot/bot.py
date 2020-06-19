@@ -8,6 +8,8 @@ from core import *
 
 ### TODO:
 # tit request
+# background help
+# character formation
 
 
 config = json.load(open('../config.json'))
@@ -37,7 +39,10 @@ def handle_roll(message):
     try:
         name = message.from_user.username
         dice, number, mod = parse_text(message.text)
-        result, result_list = roll(dice, number, mod)    
+        # parse_text returns number = '0' if there was an error
+        if (number == '0'):
+            bot.reply_to(message, 'eh?')
+        result, result_list = roll(dice, number, mod)
         response = f'@{name} rolled {result}, ({result_list})'
     except Exception as e:
         print(e)
