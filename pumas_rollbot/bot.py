@@ -22,7 +22,9 @@ HELP_MESSAGE = ('I can roll dice and do funny stuff!\n\n'
                 '/ps - short version\n\n'
                 '/alive - returns the emotional state of the bot\n'
                 '/spongebob - takes your sentence and returns a saltier one\n'
-                '/sp - short version\n')
+                '/sp - short version\n\n'
+                '/spongerep - reply to a message writing this, it will mock the first message\n'
+                '/spr - short version')
 
 
 config = json.load(open('../config.json'))
@@ -132,5 +134,18 @@ def handle_spongebob(message):
     bot.reply_to(message, sentence)
     pass
 
-  
+
+### handle_spongebob_reply(message)
+# handler for the commands /spongebob, /sp
+
+@bot.message_handler(commands=['spongerep', 'spr'])
+def handle_spongebob_reply(message):
+    try:
+        sentence = spongebob_sentence(message.reply_to_message.text)
+    except Exception as e:
+        print(e)
+        sentence = 'YoU CaN\'t eVeN SpElL RiGhT'
+    bot.reply_to(message.reply_to_message, sentence)
+    pass
+
 bot.polling()
