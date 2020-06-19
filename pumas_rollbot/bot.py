@@ -4,10 +4,9 @@ import sys
 import json
 import telebot
 
-from core import *
+from random import randint
 
-### TODO:
-# tit request
+from core import *
 
 
 config = json.load(open('../config.json'))
@@ -34,14 +33,17 @@ def welcome(message):
 
 @bot.message_handler(commands=['roll', 'r'])
 def handle_roll(message):
-    try:
-        name = message.from_user.username
-        dice, number, mod = parse_text(message.text)
-        result, result_list = roll(dice, number, mod)    
-        response = f'@{name} rolled {result}, ({result_list})'
-    except Exception as e:
-        print(e)
-        response = 'eh?'
+    if randint(0, 100) <= 1:
+        response = tit_request()
+    else:
+        try:
+            name = message.from_user.username
+            dice, number, mod = parse_text(message.text)
+            result, result_list = roll(dice, number, mod)    
+            response = f'@{name} rolled {result}, ({result_list})'
+        except Exception as e:
+            print(e)
+            response = 'eh?'
     bot.reply_to(message, response)
     pass
 
@@ -138,5 +140,9 @@ def handle_spongebob_reply(message):
         sentence = 'YoU CaN\'t eVeN SpElL RiGhT'
     bot.reply_to(message.reply_to_message, sentence)
     pass
+
+
+
+
 
 bot.polling()
