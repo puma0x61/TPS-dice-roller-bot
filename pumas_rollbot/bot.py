@@ -8,6 +8,7 @@ from random import randint
 
 from core import *
 
+
 ### TODO:
 # tit request
 # background help
@@ -158,4 +159,3 @@ def handle_spongebob_reply(message):
 
 
 bot.polling()
-
