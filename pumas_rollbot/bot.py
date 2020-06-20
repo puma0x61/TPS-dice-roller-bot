@@ -28,11 +28,11 @@ def welcome(message):
     pass
 
 
-### handle_text(message)
+### handle_nudes(message)
 # asks for nudes, sometimes
 
-@bot.message_handler(func=lambda pippo: randint(0, 100) <= 1, content_types=["text"])
-def handle_text(message):
+@bot.message_handler(func=lambda nudes_chance: randint(1, 1000) == 1, content_types=["text"])
+def handle_nudes(message):
     bot.reply_to(message, tit_request())
 
 
