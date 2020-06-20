@@ -49,7 +49,7 @@ def handle_roll(message):
     try:
         name = message.from_user.username
         dice, number, mod = parse_text(message.text)
-        # parse_text returns number = '0' if there was an error
+        # parse_text returns number = 0 if there was an error
         if (number == 0):
             bot.reply_to(message, 'eh?')
         result, result_list = roll(dice, number, mod)
