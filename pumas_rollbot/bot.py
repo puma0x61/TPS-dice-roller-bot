@@ -39,6 +39,7 @@ def welcome(message):
 @bot.message_handler(func=lambda nudes_chance: randint(1, 1000) == 1, content_types=["text"])
 def handle_nudes(message):
     bot.reply_to(message, tit_request())
+    pass
 
 
 ### handle_roll(message)
@@ -106,6 +107,7 @@ def handle_pelor(message):
     bot.send_sticker(chat_id, "CAACAgQAAxkBAANDXuZB7Nb-rImmxXLfiWVXqj2OG5UAAjwAAy_0Wg-jNOhAndo8mxoE")
     pass
 
+
 ### handle_i_am_alive
 # handler for the command /alive
 
@@ -115,6 +117,7 @@ def handle_i_am_alive(message):
     new_message = alive_service()
     new_message = f'Yes, @{name}, {new_message}'
     bot.reply_to(message, new_message)
+    pass
 
 
 ### handle_edgelord
