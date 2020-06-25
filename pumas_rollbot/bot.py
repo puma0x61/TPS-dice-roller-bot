@@ -97,6 +97,15 @@ def handle_penis_size(message):
     pass
 
 
+### handle_tit_size
+# handler for the commands /tit_size, /ts
+
+@bot.message_handler(commands=['tit_size', 'ts'])
+def handle_tits(message):
+    bot.reply_to(message, tit_size_feature())
+    pass
+
+
 ### handle_pelor(message)
 # answers to messages containing "pelor" with the right sticker
 
