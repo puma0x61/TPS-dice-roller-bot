@@ -156,3 +156,8 @@ TIT_REQUEST_SERVICE = [
         'hmm',
         'oh Pelor, grant me the strength to ask for nudes'
 ]
+
+TIT_SIZE = [
+        ['Non importano le dimensioni,'],
+        ['sono comunque bellissime']
+]
