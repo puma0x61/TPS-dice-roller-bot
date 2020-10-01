@@ -65,39 +65,6 @@ def handle_score(message):
     pass
 
 
-### handle_score
-# handler for the commands /penis_size, /ps
-
-@bot.message_handler(commands=['penis_size', 'ps'])
-def handle_penis_size(message):
-    name = message.from_user.username
-    try:
-        command, mod = message.text.split()
-        size = roll_penis(int(mod))
-    except Exception as e:
-        print(e)
-        size = roll_penis(0)
-    if size[1] == 'mandingo':
-        penis_size = f'Impressive, @{name}, you must be very proud\n(you rolled a {size[0]})'
-    elif size[1] == 'micropenis':
-        penis_size = f'Ehm... I\'m certain you have other... qualities\n(you rolled a {size[0]})'
-    elif size[1] == 'weird':
-        penis_size = f'Let\'s not get too negative: your boobs are pretty... nice? I guess?\n(you rolled a {size[0]})'
-    else:
-        penis_size = f'Yeah, you\'re normal. A  boring %.2fcm\n(you rolled a {size[0]})'%size[1]
-    bot.reply_to(message, penis_size)
-    pass
-
-
-### handle_tit_size
-# handler for the commands /tit_size, /ts
-
-@bot.message_handler(commands=['tit_size', 'ts'])
-def handle_tits(message):
-    bot.reply_to(message, tit_size_feature())
-    pass
-
-
 ### handle_pelor(message)
 # answers to messages containing "pelor" with the right sticker
 

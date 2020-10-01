@@ -44,22 +44,6 @@ def score_roll():
     return return_list
 
 
-### roll_penis(mod)
-# rolls a d20 to decide the penis_size of a pc
-
-def roll_penis(mod):
-    die = roll(20, 1, 0, True)
-    if die == 20:
-        result = (die, 'mandingo')
-    elif die == 1:
-        result = (die, 'micropenis')
-    else:
-        result = (die, 10 + math.log2(die) + mod)
-        if result[1] < 6:
-            result = (die, 'weird')
-    return result
-
-
 ### remove_minimum(input_list)
 # removes the minimum element from input_list
 
