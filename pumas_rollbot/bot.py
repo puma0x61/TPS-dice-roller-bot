@@ -33,14 +33,6 @@ def welcome(message):
     pass
 
 
-### handle_nudes(message)
-# asks for nudes, sometimes
-
-@bot.message_handler(func=lambda nudes_chance: randint(1, 1000) == 1, content_types=["text"])
-def handle_nudes(message):
-    bot.reply_to(message, tit_request())
-
-
 ### handle_roll(message)
 # handler for the commands /roll, /r
 
@@ -94,6 +86,15 @@ def handle_penis_size(message):
     else:
         penis_size = f'Yeah, you\'re normal. A  boring %.2fcm\n(you rolled a {size[0]})'%size[1]
     bot.reply_to(message, penis_size)
+    pass
+
+
+### handle_tit_size
+# handler for the commands /tit_size, /ts
+
+@bot.message_handler(commands=['tit_size', 'ts'])
+def handle_tits(message):
+    bot.reply_to(message, tit_size_feature())
     pass
 
 
