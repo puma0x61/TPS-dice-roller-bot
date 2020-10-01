@@ -147,17 +147,3 @@ EDGELORD_PARTS=[
     ]
 ]
 
-TIT_REQUEST_SERVICE = [
-        'send b00bs',
-        'send tits',
-        'send nudes ;)',
-        'TITS, NOW',
-        'may I see your breasts, darling?',
-        'hmm',
-        'oh Pelor, grant me the strength to ask for nudes'
-]
-
-TIT_SIZE = [
-        ['Non importano le dimensioni,'],
-        ['sono comunque bellissime']
-]
