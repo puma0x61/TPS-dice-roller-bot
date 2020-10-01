@@ -33,14 +33,6 @@ def welcome(message):
     pass
 
 
-### handle_nudes(message)
-# asks for nudes, sometimes
-
-@bot.message_handler(func=lambda nudes_chance: randint(1, 1000) == 1, content_types=["text"])
-def handle_nudes(message):
-    bot.reply_to(message, tit_request())
-
-
 ### handle_roll(message)
 # handler for the commands /roll, /r
 
@@ -70,30 +62,6 @@ def handle_score(message):
     score_list = score_roll()
     ability_scores = f'@{name} rolled {score_list}'
     bot.reply_to(message, ability_scores)
-    pass
-
-
-### handle_score
-# handler for the commands /penis_size, /ps
-
-@bot.message_handler(commands=['penis_size', 'ps'])
-def handle_penis_size(message):
-    name = message.from_user.username
-    try:
-        command, mod = message.text.split()
-        size = roll_penis(int(mod))
-    except Exception as e:
-        print(e)
-        size = roll_penis(0)
-    if size[1] == 'mandingo':
-        penis_size = f'Impressive, @{name}, you must be very proud\n(you rolled a {size[0]})'
-    elif size[1] == 'micropenis':
-        penis_size = f'Ehm... I\'m certain you have other... qualities\n(you rolled a {size[0]})'
-    elif size[1] == 'weird':
-        penis_size = f'Let\'s not get too negative: your boobs are pretty... nice? I guess?\n(you rolled a {size[0]})'
-    else:
-        penis_size = f'Yeah, you\'re normal. A  boring %.2fcm\n(you rolled a {size[0]})'%size[1]
-    bot.reply_to(message, penis_size)
     pass
 
 
