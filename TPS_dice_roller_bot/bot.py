@@ -9,10 +9,11 @@ from random import randint
 from core import *
 
 ### TODO:
-# tit request
 # background help
 # character formation
 
+### config read
+# reads the correct token from config.json
 
 config = json.load(open('../config.json'))
 if config[sys.argv[1]]:
