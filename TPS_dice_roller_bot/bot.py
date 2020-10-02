@@ -9,14 +9,15 @@ from random import randint
 from core import *
 
 ### TODO:
-# tit request
 # background help
 # character formation
 
+### config read
+# reads the correct token from config.json
 
 config = json.load(open('../config.json'))
-if config['test_bot']:
-    bot = telebot.TeleBot(token=config['test_bot'])
+if config[sys.argv[1]]:
+    bot = telebot.TeleBot(token=config[sys.argv[1]])
 else:
     print ("###################################################")
     print ("# Please setup the needed keys in the config file #")
