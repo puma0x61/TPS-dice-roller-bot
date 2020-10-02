@@ -15,8 +15,8 @@ from core import *
 
 
 config = json.load(open('../config.json'))
-if config['test_bot']:
-    bot = telebot.TeleBot(token=config['test_bot'])
+if config[sys.argv[1]]:
+    bot = telebot.TeleBot(token=config[sys.argv[1]])
 else:
     print ("###################################################")
     print ("# Please setup the needed keys in the config file #")
