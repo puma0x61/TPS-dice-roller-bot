@@ -41,12 +41,11 @@ def welcome(message):
 def handle_roll(message):
     try:
         name = message.from_user.username
-        dice, number, mod = parse_text(message.text)
-        # parse_text returns number = 0 if there was an error
-        if (number == 0):
-            bot.reply_to(message, 'eh?')
-        result, result_list = roll(dice, number, mod)
-        response = f'@{name} rolled {result}, ({result_list})'
+        result, result_list, comment = roll_message(message.text)
+        if comment is None:
+            response = f'@{name} rolled {result}, ({result_list})'
+        else:
+            response = f'{result} {comment}'
     except Exception as e:
         print(e)
         response = 'eh?'

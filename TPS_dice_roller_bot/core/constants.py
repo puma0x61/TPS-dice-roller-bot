@@ -1,3 +1,7 @@
+DICE_ROLL_REGEX = '[\\w|\\s|!-/|:-@]*?[\\s]' \
+                  '([0-9]*[\\s]*)d[\\s]*([0-9]+)' \
+                  '[\\s]*([\\+|\\-][\\s]*[0-9]*)*[\\s]*(.*)[\\s]*$'
+
 HELP_MESSAGE = ('I can roll dice and do funny stuff!\n\n'
                 'You can control me by sending these commands:\n\n'
                 '/help - sends this help message\n'

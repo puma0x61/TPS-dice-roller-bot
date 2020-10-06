@@ -1,26 +1,17 @@
+import re
+
+
 ### parse_text(text)
-# takes a string, return three values for use with roll()
+# takes a string, return a list of strings with the matching groups
 
-def parse_text(text):
-    command, equation = text.split(' ')
-    number, other = equation.split('d')
+def parse_text_regex(text, regex):
     try:
-        if '+' in other:
-            dice, mod = other.split('+')
-        elif '-' in other:
-            dice, mod = other.split('-')
-            mod = '-' + mod
-        else:
-            dice, mod = other, '0'
-
-        if len(number) == 0:
-            number = '1'
-        if int(number) < 0:
-            result = (int(0), int(0), int(0))
-        else:
-            result = (int(dice), int(number), int(mod))
+        compiled_regex = re.compile(regex)
+        if compiled_regex is None:
+            raise Exception(f"String {text} doesn't match {regex}")
+    except TypeError as te:
+        raise Exception(te)
     except Exception as e:
-        print(e)
-        return (int(0), int(0), int(0))
-
-    return result
+        raise e
+    match = compiled_regex.match(text)
+    return match.groups()
