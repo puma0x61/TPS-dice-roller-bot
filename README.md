@@ -18,3 +18,5 @@ The primary function of the bot is to roll dice (with any number of sides), and 
 `/spongerep`, short `/spr`: similar to the previous one, used answering to a message, returns the saltier version
 
 `/edgelord`: creates an edgy backstory for your next character
+
+`/character`, short `/char` : creates a fully fledged character

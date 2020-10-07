@@ -123,5 +123,14 @@ def handle_spongebob_reply(message):
     pass
 
 
+### handle_character_creator(message)
+# handler for the command /character, /char
+
+@bot.message_handler(commands=['character', 'char'])
+def handle_character_creator(message):
+    bot.reply_to(message, handle_character_creator())
+    pass
+
+
 bot.polling()
 
