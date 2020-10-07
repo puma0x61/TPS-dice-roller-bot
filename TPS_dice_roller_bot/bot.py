@@ -93,7 +93,7 @@ def handle_i_am_alive(message):
 def handle_edgelord(message):
     bot.reply_to(message, edgelord_feature())
     pass
-    
+
 
 ### handle_spongebob(message)
 # handler for the commands /spongebob, /sp
@@ -128,9 +128,8 @@ def handle_spongebob_reply(message):
 
 @bot.message_handler(commands=['character', 'char'])
 def handle_character_creator(message):
-    bot.reply_to(message, handle_character_creator())
+    bot.reply_to(message,  pg_creation_feature())
     pass
 
 
 bot.polling()
-
