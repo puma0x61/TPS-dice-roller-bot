@@ -1,6 +1,7 @@
 from random import choice
 from .constants import PG_CREATION_PARTS
 from .roll import score_roll
+from .HTML_text_formatter import HTML_text_formatter as html
 
 
 def pg_creation_feature():
@@ -18,9 +19,10 @@ def characteristic_selector(key):
 
 
 def characteristic_message_creator(key, characteristic):
-    return key + ': ' + characteristic
+    return html(key, 'bold') + ': ' + characteristic
 
 
 def ability_scores_creator():
     scores = score_roll()
-    return f'Ability scores: {scores}'
+    ability_scores = html('Ability scores: ', 'bold') + ''.join(str(scores))
+    return ability_scores 
