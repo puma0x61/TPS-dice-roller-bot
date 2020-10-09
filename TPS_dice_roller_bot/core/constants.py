@@ -159,7 +159,7 @@ PG_CREATION_PARTS={
     ],
     'Sexual orientation': [
       'Heterosexual',
-      'Omosexual',
+      'Homosexual',
       'Bisexual',
       'Pansexual',
       'Asexual',

@@ -42,10 +42,10 @@ def handle_roll(message):
     try:
         name = message.from_user.username
         result, result_list, comment = roll_message(message.text)
-        if comment is None:
+        if comment is None or comment == '':
             response = f'@{name} rolled {result}, ({result_list})'
         else:
-            response = f'{result} {comment}'
+            response = f'@{name} says {comment} (rolled {result})'
     except Exception as e:
         print(e)
         response = 'eh?'

@@ -8,7 +8,7 @@ from .parse import parse_text_regex
 ### roll_message(message, single_result_mode)
 # takes the message and give back the rolled dices
 
-def roll_message(message, single_result_mode=False):
+def roll_message(message):
     try:
         message = message.replace('/roll', '')
         message = message.replace('/r', '')
