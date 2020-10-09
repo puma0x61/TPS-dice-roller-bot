@@ -41,15 +41,17 @@ def welcome(message):
 def handle_roll(message):
     try:
         name = message.from_user.username
+        user_id = message.from_user.id
+        print(message)
         result, result_list, comment = roll_message(message.text)
         if comment is None or comment == '':
-            response = f'@{name} rolled {result}, ({result_list})'
+            response = f'@{name} rolled <b>{result}</b>, ({result_list})' 
         else:
-            response = f'@{name} says {comment} (rolled {result})'
+            response = f'@{name} rolled <b>{comment}</b>\n<b>{result}</b> ({result_list})'
     except Exception as e:
         print(e)
         response = 'eh?'
-    bot.reply_to(message, response)
+    bot.reply_to(message, response, parse_mode='HTML')
     pass
 
 
@@ -127,7 +129,7 @@ def handle_spongebob_reply(message):
 
 @bot.message_handler(commands=['character', 'char'])
 def handle_character_creator(message):
-    bot.reply_to(message,  pg_creation_feature())
+    bot.reply_to(message, pg_creation_feature(), parse_mode='HTML')
     pass
 
 
