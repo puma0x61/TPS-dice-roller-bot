@@ -2,6 +2,8 @@ DICE_ROLL_REGEX = '[\\w|\\s|!-/|:-@]*?[\\s]' \
                   '([0-9]*[\\s]*)d[\\s]*([0-9]+)' \
                   '[\\s]*([\\+|\\-][\\s]*[0-9]*)*[\\s]*(.*)[\\s]*$'
 
+SPONGEBOB_CLEANER_REGEX = '\\/spongebob|\\/spongerep|\\/spr|\\/sp'
+
 HELP_MESSAGE = ('I can roll dice and do funny stuff!\n\n'
                 'You can control me by sending these commands:\n\n'
                 '/help - sends this help message\n'
@@ -14,7 +16,8 @@ HELP_MESSAGE = ('I can roll dice and do funny stuff!\n\n'
                 '/alive - returns the emotional state of the bot\n'
                 '/spongebob - takes your sentence and returns a saltier one\n'
                 '/sp - short version\n\n'
-                '/spongerep - reply to a message writing this, it will mock the first message\n'
+                '/spongerep - reply to a message writing this, it will mock the first message. You can write a message '
+                'to use it in the response\n'
                 '/spr - short version\n\n'
                 '/edgelord - give your character a reason to brood\n'
                 'this command is the only one to just have a long version, for added edginess\n\n'

@@ -111,12 +111,12 @@ def handle_spongebob(message):
 
 
 ### handle_spongebob_reply(message)
-# handler for the commands /spongebob, /sp
+# handler for the commands /spongerep, /spr
 
 @bot.message_handler(commands=['spongerep', 'spr'])
 def handle_spongebob_reply(message):
     try:
-        sentence = spongebob_sentence(message.reply_to_message.text)
+        sentence = spongebob_sentence_flow_decider(message)
     except Exception as e:
         print(e)
         sentence = 'YoU CaN\'t eVeN SpElL RiGhT'
