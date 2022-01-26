@@ -44,7 +44,7 @@ def score_roll():
 
 def roll(number, dice, mod):
     if number > 100:
-       raise Exception('Too many dice. Max allowed is 100')
+        raise Exception('Too many dice. Max allowed is 100')
 
     result_list = []
     for i in range(0, abs(number)):
@@ -85,4 +85,3 @@ def normalize_values(values):
         mod = mod.replace(" ", "")
 
     return int(number), int(dice), int(mod), comment
-
