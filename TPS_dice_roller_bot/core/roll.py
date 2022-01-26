@@ -71,7 +71,7 @@ def remove_minimum(input_list):
 def normalize_values(values):
     number, dice, mod, comment = values
 
-    if number is None or number == ' ':
+    if number is None or number == ' ' or number == '':
         number = 1
     else:
         number = number.replace(" ", "")
