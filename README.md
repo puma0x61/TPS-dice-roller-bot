@@ -15,7 +15,7 @@ The primary function of the bot is to roll dice (with any number of sides), and 
 
 `/spongebob`, short `/sp`: followed by a sentence, replies with the saltier version
 
-`/spongerep`, short `/spr`: similar to the previous one, used answering to a message, returns the saltier version. You can write a message to use it instead in the reply
+`/spongerep`, short `/spr`: similar to the previous one, used answering to a message, returns the saltier version
 
 `/edgelord`: creates an edgy backstory for your next character
 
