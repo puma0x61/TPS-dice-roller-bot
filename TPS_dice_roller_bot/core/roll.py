@@ -13,7 +13,6 @@ def roll_message(message, single_result_mode=False):
         message = message.replace('/roll', '')
         message = message.replace('/r', '')
         parsed_groups = parse_text_regex(message, DICE_ROLL_REGEX)
-        print(parsed_groups)
         number, dice, mod, comment = normalize_values(list(parsed_groups))
         result, result_list = roll(number, dice, mod)
         return result, result_list, comment.strip()
