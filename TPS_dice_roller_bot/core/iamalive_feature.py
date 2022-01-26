@@ -1,6 +1,7 @@
 from random import choice
 from .constants import ALIVE_SERVICE
 
+
 ### alive_service()
 # returns a random sentence
 

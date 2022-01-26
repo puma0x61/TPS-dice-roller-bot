@@ -1,10 +1,9 @@
 #! /usr/bin/python
 
-import sys
 import json
-import telebot
+import sys
 
-from random import randint
+import telebot
 
 from core import *
 
@@ -12,16 +11,16 @@ from core import *
 # background help
 # character formation
 
-### config read
+### config
 # reads the correct token from config.json
 
 config = json.load(open('../config.json'))
 if config[sys.argv[1]]:
     bot = telebot.TeleBot(token=config[sys.argv[1]])
 else:
-    print ("###################################################")
-    print ("# Please setup the needed keys in the config file #")
-    print ("###################################################")
+    print("###################################################")
+    print("# Please setup the needed keys in the config file #")
+    print("###################################################")
     sys.exit()
 
 
@@ -41,15 +40,15 @@ def welcome(message):
 def handle_roll(message):
     try:
         name = message.from_user.username
-        user_id = message.from_user.id
-        print(message)
+        # user_id = message.from_user.id
+        # print(message)
         result, result_list, comment = roll_message(message.text)
         if comment is None or comment == '':
             response = f'@{name} rolled <b>{result}</b>, ({result_list})'
         else:
             response = f'@{name} rolled <b>{comment}</b>\n<b>{result}</b> ({result_list})'
     except Exception as e:
-        print(e)
+        # print(e)
         response = 'eh?'
     bot.reply_to(message, response, parse_mode='HTML')
     pass
@@ -70,11 +69,12 @@ def handle_score(message):
 ### handle_pelor(message)
 # answers to messages containing "pelor" with the right sticker
 
-@bot.message_handler(regexp="pelor")
-def handle_pelor(message):
-    chat_id = message.chat.id
-    bot.send_sticker(chat_id, "CAACAgQAAxkBAANDXuZB7Nb-rImmxXLfiWVXqj2OG5UAAjwAAy_0Wg-jNOhAndo8mxoE")
-    pass
+# @bot.message_handler(regexp="pelor")
+# def handle_pelor(message):
+#    chat_id = message.chat.id
+#    bot.send_sticker(chat_id, "CAACAgQAAxkBAANDXuZB7Nb-rImmxXLfiWVXqj2OG5UAAjwAAy_0Wg-jNOhAndo8mxoE")
+#    pass
+
 
 ### handle_i_am_alive
 # handler for the command /alive
@@ -111,12 +111,12 @@ def handle_spongebob(message):
 
 
 ### handle_spongebob_reply(message)
-# handler for the commands /spongebob, /sp
+# handler for the commands /spongerep, /spr
 
 @bot.message_handler(commands=['spongerep', 'spr'])
 def handle_spongebob_reply(message):
     try:
-        sentence = spongebob_sentence(message.reply_to_message.text)
+        sentence = spongebob_sentence_flow_decider(message)
     except Exception as e:
         print(e)
         sentence = 'YoU CaN\'t eVeN SpElL RiGhT'

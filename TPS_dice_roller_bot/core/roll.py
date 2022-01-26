@@ -44,7 +44,7 @@ def score_roll():
 
 def roll(number, dice, mod):
     if number > 100:
-       raise Exception('Too many dice. Max allowed is 100')
+        raise Exception('Too many dice. Max allowed is 100')
 
     result_list = []
     for i in range(0, abs(number)):
@@ -71,8 +71,8 @@ def remove_minimum(input_list):
 def normalize_values(values):
     number, dice, mod, comment = values
 
-    if number is None:
-        number = 0
+    if number is None or number == ' ':
+        number = 1
     else:
         number = number.replace(" ", "")
     if dice is None:
@@ -85,4 +85,3 @@ def normalize_values(values):
         mod = mod.replace(" ", "")
 
     return int(number), int(dice), int(mod), comment
-
