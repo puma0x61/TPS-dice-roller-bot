@@ -13,6 +13,7 @@ def roll_message(message, single_result_mode=False):
         message = message.replace('/roll', '')
         message = message.replace('/r', '')
         parsed_groups = parse_text_regex(message, DICE_ROLL_REGEX)
+        print(parsed_groups)
         number, dice, mod, comment = normalize_values(list(parsed_groups))
         result, result_list = roll(number, dice, mod)
         return result, result_list, comment.strip()
@@ -71,7 +72,7 @@ def remove_minimum(input_list):
 def normalize_values(values):
     number, dice, mod, comment = values
 
-    if number is None or number == ' ':
+    if number is None or number == ' ' or number == '':
         number = 1
     else:
         number = number.replace(" ", "")
