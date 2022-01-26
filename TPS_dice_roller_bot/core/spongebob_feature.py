@@ -1,5 +1,6 @@
-from TPS_dice_roller_bot.core.constants import SPONGEBOB_CLEANER_REGEX
-from TPS_dice_roller_bot.core.parse import clean_string_with_regex
+from .constants import SPONGEBOB_CLEANER_REGEX
+from .parse import clean_string_with_regex
+
 
 ### spongebob_sentence_flow_decider(message)
 # take the message and decides the desired behaviour

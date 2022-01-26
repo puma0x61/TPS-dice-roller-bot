@@ -28,7 +28,7 @@ STYLES = {
 ### HTML_text_formatter(text, style)
 #   takes an input text and formats it in the given style for use with HTML parse mode
 
-def HTML_text_formatter(text, style):
+def html_text_formatter(text, style):
     formatted_text = STYLES[style][0] + text + STYLES[style][1]
     return formatted_text
 
