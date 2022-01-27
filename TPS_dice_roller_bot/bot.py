@@ -49,7 +49,7 @@ def handle_roll(message):
             response = f'@{name} rolled <b>{comment}</b>\n<b>{result}</b> ({result_list})'
     except Exception as e:
         # print(e)
-        response = 'eh?'
+        response = choice(SALTY_ANSWER)
     bot.reply_to(message, response, parse_mode='HTML')
     pass
 

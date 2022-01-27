@@ -40,6 +40,21 @@ ALIVE_SERVICE = [
     'Pelor sucks'
 ]
 
+SALTY_ANSWER = [
+    'eh?',
+    'Yeah, sure',
+    'try writing something that makes sense, next time',
+    'I\'m sure you can do better',
+    'Wait. Are you sure about that?',
+    'You may wanna think this over',
+    'Did you really drink that much?',
+    'Why do you people keep not reading the instructions?',
+    'Well, fuck you too',
+    'ಠ_ಠ',
+    '...',
+    'boooring'
+]
+
 EDGELORD_PARTS = [
     # Edgy antagonist
     [

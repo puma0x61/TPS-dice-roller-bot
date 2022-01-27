@@ -9,16 +9,15 @@ from .parse import parse_text_regex
 # takes the message and give back the rolled dices
 
 def roll_message(message, single_result_mode=False):
-
-    message = message.replace('/roll', '')
-    message = message.replace('/r', '')
     try:
+        message = message.replace('/roll', '')
+        message = message.replace('/r', '')
         parsed_groups = parse_text_regex(message, DICE_ROLL_REGEX)
         number, dice, mod, comment = normalize_values(list(parsed_groups))
-    except:
-        number, dice, mod, comment = 1, 20, 0, message
-    result, result_list = roll(number, dice, mod)
-    return result, result_list, comment.strip()
+        result, result_list = roll(number, dice, mod)
+        return result, result_list, comment.strip()
+    except Exception as e:
+        raise e
 
 
 ### score_roll()
