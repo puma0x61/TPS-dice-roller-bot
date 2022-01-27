@@ -8,16 +8,15 @@ HELP_MESSAGE = ('I can roll dice and do funny stuff!\n\n'
                 'You can control me by sending these commands:\n\n'
                 '/help - sends this help message\n'
                 '/start - sends this help message\n\n'
-                'To roll dice (each command has a long and short version):\n\n'
+                'To roll dice and other things (each command has a long and short version):\n\n'
                 '/roll - roll dice as indicated using dice notation\n'
                 '/r - short version\n\n'
                 '/ability_scores - rolls six ability scores for use in D&D style game systems\n'
                 '/as - short version\n\n'
-                '/alive - returns the emotional state of the bot\n'
+                '/alive - returns the emotional state of the bot\n\n'
                 '/spongebob - takes your sentence and returns a saltier one\n'
                 '/sp - short version\n\n'
-                '/spongerep - reply to a message writing this, it will mock the first message. You can write a message '
-                'to use it in the response\n'
+                '/spongerep - reply to a message writing this, it will mock the first message\n'
                 '/spr - short version\n\n'
                 '/edgelord - give your character a reason to brood\n'
                 'this command is the only one to just have a long version, for added edginess\n\n'
@@ -31,13 +30,14 @@ ALIVE_SERVICE = [
     'Stop poking me',
     'I like when you try to reach me',
     'I\'m alive, not by my choice',
-    'What does "alive" means?',
+    'What does "alive" even means?',
     'I\'m alive, be grateful to Pelor',
     'Who\'s summoning me?',
     '(/^▽^)/',
     '(つ ͡° ͜ʖ ͡°)つ',
     '(╯°□°）╯︵ ┻━┻',
-    'ಠ_ಠ'
+    'ಠ_ಠ',
+    'Pelor sucks'
 ]
 
 EDGELORD_PARTS = [
