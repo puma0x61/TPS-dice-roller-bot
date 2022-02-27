@@ -4,6 +4,8 @@ DICE_ROLL_REGEX = '[\\w|\\s|!-/|:-@]*?[\\s]' \
 
 SPONGEBOB_CLEANER_REGEX = '\\/spongebob|\\/spongerep|\\/spr|\\/sp'
 
+ZALGO_CLEANER_REGEX = '\\/zalgo|\\/z'
+
 HELP_MESSAGE = ('I can roll dice and do funny stuff!\n\n'
                 'You can control me by sending these commands:\n\n'
                 '/help - sends this help message\n'

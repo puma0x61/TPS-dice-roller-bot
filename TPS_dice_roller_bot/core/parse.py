@@ -21,3 +21,4 @@ def clean_string_with_regex(text, regex):
     cleaned_string = re.sub(regex, '', text)
     cleaned_string = cleaned_string.strip()
     return cleaned_string
+
