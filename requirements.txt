@@ -1,2 +1,3 @@
 pyTelegramBotAPI
 iteration_utilities
+zalgo-text
