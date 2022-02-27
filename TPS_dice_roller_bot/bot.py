@@ -124,6 +124,19 @@ def handle_spongebob_reply(message):
     pass
 
 
+### handle_zalgo(message)
+# handler for the commands /zalgo, /z
+
+@bot.message_handler(commands=['zalgo', 'z'])
+def handle_zalgo(message):
+    try:
+        sentence = zalgo_sentence(message.text)
+        bot.reply_to(message, sentence)
+    except Exception as e:
+        print(e)
+    pass
+
+
 ### handle_character_creator(message)
 # handler for the command /character, /char
 

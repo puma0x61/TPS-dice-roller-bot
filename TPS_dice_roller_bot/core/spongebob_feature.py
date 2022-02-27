@@ -19,6 +19,7 @@ def spongebob_sentence_flow_decider(message):
 ### spongebob_sentence(message)
 # take the message text and returns a sentence with alternating upper and lowercase chars
 
+
 def spongebob_sentence(message_text):
     message_split = message_cleaner(message_text)
     message_split_list = message_split.split(' ')
