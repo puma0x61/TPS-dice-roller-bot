@@ -4,7 +4,7 @@ A free and open source telegram bot that you can find [here](https://telegram.me
 
 Made by  [me](https://github.com/PumaConcolor) and [Jacopo De Angelis](https://github.com/JacopoDeAngelis) using [pyTelegramBotAPI](https://github.com/eternnoir/pyTelegramBotAPI) in our spare time.
 
-The primary function of the bot is to roll dice (with any number of sides), and other fun things related primarily to D&D style RPGs.
+The primary function of the bot is to roll dice (with any number of sides), and other fun things related to TTRPGs of various types.
 
 ## Commands
 `/roll`, short `/r`: rolls dice as specified using [dice notation](https://en.wikipedia.org/wiki/Dice_notation)
@@ -20,3 +20,7 @@ The primary function of the bot is to roll dice (with any number of sides), and 
 `/edgelord`: creates an edgy backstory for your next character
 
 `/character`, short `/char` : creates a fully fledged character
+
+`/fabula`, short `/f` : creates a pc for fabula ultima
+
+`/zalgo`, short `/z` : create your own cursed sentence!
