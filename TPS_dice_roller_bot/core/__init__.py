@@ -6,3 +6,4 @@ from .edgelord_feature import edgelord_feature
 from .constants import *
 from .pg_creation_feature import *
 from .zalgo_text_feature import zalgo_sentence
+from .fabula_pg_feature import fabula_pg_feature

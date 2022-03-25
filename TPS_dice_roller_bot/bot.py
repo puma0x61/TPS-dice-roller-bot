@@ -155,4 +155,15 @@ def handle_character_creator(message):
     pass
 
 
+@bot.message_handler(commands=['fabula', 'f'])
+def handle_fabula(message):
+    try:
+        pg = fabula_pg_feature()
+    except Exception as e:
+        print(e)
+        pg = 'I\'m sorry, what?'
+    bot.reply_to(message, pg)
+    pass
+
+
 bot.polling()
