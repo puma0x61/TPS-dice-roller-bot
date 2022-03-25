@@ -104,12 +104,12 @@ def handle_spongebob(message):
     try:
         sentence = spongebob_sentence(message.text)
         chat_id = message.chat.id
-        message_id = message.id
+        message_id = message.message_id
+        bot.reply_to(message, sentence)
+        bot.delete_message(chat_id, message_id)
     except Exception as e:
         print(e)
         sentence = 'YoU CaN\'t eVeN SpElL RiGhT'
-    bot.reply_to(message, sentence)
-    bot.delete_message(chat_id, message_id)
     pass
 
 
@@ -121,12 +121,12 @@ def handle_spongebob_reply(message):
     try:
         sentence = spongebob_sentence_flow_decider(message)
         chat_id = message.chat.id
-        message_id = message.id
+        message_id = message.message_id
+        bot.reply_to(message.reply_to_message, sentence)
+        bot.delete_message(chat_id, message_id)
     except Exception as e:
         print(e)
         sentence = 'YoU CaN\'t eVeN SpElL RiGhT'
-    bot.reply_to(message.reply_to_message, sentence)
-    bot.delete_message(chat_id, message_id)
     pass
 
 
@@ -137,7 +137,7 @@ def handle_spongebob_reply(message):
 def handle_zalgo(message):
     try:
         chat_id = message.chat.id
-        message_id = message.id
+        message_id = message.message_id
         sentence = zalgo_sentence(message.text)
         bot.delete_message(chat_id, message_id)
         bot.send_message(chat_id, sentence)
