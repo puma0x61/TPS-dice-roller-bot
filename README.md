@@ -1,4 +1,6 @@
 # TPS dice roller bot
+![build](https://github.com/PumaConcolor/TPS-dice-roller-bot/actions/workflows/python-app.yml/badge.svg)
+
 
 A free and open source telegram bot that you can find [here](https://telegram.me/TPS_dice_roller_bot).
 
