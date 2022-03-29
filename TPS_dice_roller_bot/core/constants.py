@@ -25,7 +25,9 @@ HELP_MESSAGE = ('I can roll dice and do funny stuff!\n\n'
                 '/edgelord - give your character a reason to brood\n'
                 'this command is the only one to just have a long version, for added edginess\n\n'
                 '/character - creates a fully fledged character\n'
-                '/char - short version')
+                '/char - short version\n\n'
+                '/fabula - create your identity for a Fabula Ultima character\n'
+                '/f - short version')
 
 ALIVE_SERVICE = [
     'Alive and kicking',
