@@ -39,9 +39,10 @@ def welcome(message):
 @bot.message_handler(commands=['roll', 'r'])
 def handle_roll(message):
     try:
-        name = message.from_user.username
-        # user_id = message.from_user.id
-        # print(message)
+        if message.from_user.username is None:
+            name = message.from_user.first_name
+        else:
+            name = message.from_user.username
         result, result_list, comment = roll_message(message.text)
         if comment is None or comment == '':
             response = f'@{name} rolled <b>{result}</b>, ({result_list})'
@@ -126,7 +127,7 @@ def handle_spongebob_reply(message):
         bot.delete_message(chat_id, message_id)
     except Exception as e:
         print(e)
-        sentence = 'YoU CaN\'t eVeN SpElL RiGhT'
+        # sentence = 'YoU CaN\'t eVeN SpElL RiGhT'
     pass
 
 
