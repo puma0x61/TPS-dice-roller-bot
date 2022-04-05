@@ -23,7 +23,7 @@ def spongebob_sentence_flow_decider(message):
 def spongebob_sentence(message_text):
     message_split = message_cleaner(message_text)
     message_split_list = message_split.split(' ')
-    new_message = ""
+    new_message = ''
 
     # takes every string in the list
     for string in message_split_list:
@@ -41,5 +41,10 @@ def spongebob_sentence(message_text):
 
 
 def message_cleaner(message_text):
-    cleaned_message = clean_string_with_regex(message_text, SPONGEBOB_CLEANER_REGEX)
+    #    cleaned_message = clean_string_with_regex(message_text, SPONGEBOB_CLEANER_REGEX)
+    try:
+        cleaned_message = message_text.split(' ', 1)[1]
+    except IndexError:
+        cleaned_message = ''
+    pass
     return cleaned_message
