@@ -111,7 +111,7 @@ def handle_edgelord(message):
 @bot.message_handler(commands=['spongebob', 'sp'])
 def handle_spongebob(message):
     try:
-        sentence = spongebob_sentence(message.text)
+        sentence = spongebob_sentence_flow_decider(message)
         chat_id = message.chat.id
         message_id = message.message_id
         bot.reply_to(message, sentence)
