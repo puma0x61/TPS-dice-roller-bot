@@ -1,6 +1,7 @@
 #! /usr/bin/python
 
 import json
+import os
 import sys
 
 import telebot
@@ -14,13 +15,20 @@ from core import *
 ### config
 # reads the correct token from config.json
 
-config = json.load(open('../config.json'))
-if config[sys.argv[1]]:
-    bot = telebot.TeleBot(token=config[sys.argv[1]])
-else:
-    print("###################################################")
-    print("# Please setup the needed keys in the config file #")
-    print("###################################################")
+try:
+    with open(os.path.join(os.path.dirname(__file__), '..', 'config.json')) as config:
+        try:
+            config = json.load(config)
+            bot = telebot.TeleBot(config[sys.argv[1]])
+        except (IndexError, KeyError):
+            print('###################################################')
+            print('# Please setup the needed keys in the config file #')
+            print('###################################################')
+            sys.exit()
+except FileNotFoundError:
+    print('######################################')
+    print('# Please provide a valid config file #')
+    print('######################################')
     sys.exit()
 
 
