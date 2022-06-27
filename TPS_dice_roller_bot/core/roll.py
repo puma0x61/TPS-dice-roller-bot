@@ -1,4 +1,4 @@
-from random import randint
+from random import SystemRandom
 from iteration_utilities import flatten
 from .constants import DICE_ROLL_REGEX
 
@@ -49,9 +49,9 @@ def roll(number, dice, mod):
     result_list = []
     for i in range(0, abs(number)):
         if dice >= 1:
-            result_list.append(randint(1, dice))
+            result_list.append(SystemRandom().randint(1, dice))
         else:
-            result_list.append(randint(1, 1))
+            result_list.append(SystemRandom().randint(1, 1))
     result = (sum(result_list) + mod, result_list)
     return result
 
